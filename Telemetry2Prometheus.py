@@ -1,4 +1,5 @@
 #!/bin/python3
+
 import sys
 from urllib import request
 import requests
@@ -27,20 +28,13 @@ def get_catalog(token):
     # Build Auth Headers
     autHead={'Authorization': 'Bearer ' + token}
     # Set URL for request
-    telemetryUrl="https://api.ionos.com/telemetry/api/v1/series"
+    telemetryUrl="https://api.ionos.com/telemetry/api/v1/label/__name__/values"
     # Execute Request
     seriesResp = requests.get(telemetryUrl, headers=autHead)
     # Extract Data and build list of unique values
     seriesRespJson=(seriesResp.json())
     extractData=seriesRespJson['data']
-    singledata=[]
-    for value in extractData:
-        value=value['__name__']
-        if str(value) in singledata:
-            continue
-        else:
-          singledata.append(value)
-    # Return List
+    singledata=extractData
     return singledata
 
 def retrieveSeries(catalog,token):
