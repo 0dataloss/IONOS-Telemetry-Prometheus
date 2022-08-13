@@ -63,7 +63,6 @@ def retrieveSeries(catalog,token):
     return prometheusPagePrintadd
 
 # Define and star the Flask server on port 5000
-
 @app.route('/metrics')
 def main():
   tokenFromConfig=(config())
